@@ -28,12 +28,6 @@ gulp.task('clean', function() {
 
 // Process scripts and concatenate them into one output file
 gulp.task('scripts', ['clean'], function() {
-  /*
-  gulp.src(paths.scripts, {cwd: bases.app})
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
-  */
-
   gulp.src(paths.scripts, {cwd: bases.app})
     .pipe(browserify({
       debug: '!gulp.env.production',

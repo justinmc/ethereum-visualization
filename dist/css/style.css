@@ -1,0 +1,15 @@
+@-webkit-keyframes FADE-OUT {
+  0%    { opacity: 1; }
+  100%  { opacity: 0.1; }
+}
+
+.app {
+  height: 100%;
+  width: 100%;
+}
+
+.block {
+  opacity: 0.1;
+  animation: FADE-OUT 10s 1;
+  -webkit-animation: FADE-OUT 10s 1;
+}
