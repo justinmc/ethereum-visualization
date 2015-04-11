@@ -5,6 +5,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var browserify = require('gulp-browserify');
 var connect = require('gulp-connect');
+var reactify = require('reactify');
 
 var bases = {
   app: 'app/',
@@ -12,7 +13,7 @@ var bases = {
 };
 
 var paths = {
-  scripts: ['js/**/*.js', '!js/vendor/**/*.js'],
+  scripts: ['js/**/*.js', 'js/**/*.jsx', '!js/vendor/**/*.js'],
   scriptsVendor: ['js/vendor/**/*.js'],
   styles: ['css/**/*.css'],
   html: ['index.html', '404.html'],
@@ -27,13 +28,16 @@ gulp.task('clean', function() {
 
 // Process scripts and concatenate them into one output file
 gulp.task('scripts', ['clean'], function() {
+  /*
   gulp.src(paths.scripts, {cwd: bases.app})
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
+  */
 
   gulp.src(paths.scripts, {cwd: bases.app})
     .pipe(browserify({
-      debug: '!gulp.env.production'
+      debug: '!gulp.env.production',
+      transform: reactify
     }))
     //.pipe(concat('app.min.js'))
     //.pipe(uglify())
