@@ -3,9 +3,11 @@ var clean = require('gulp-clean');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var browserify = require('gulp-browserify');
+var browserify = require('browserify');
 var connect = require('gulp-connect');
 var reactify = require('reactify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 
 var bases = {
   app: 'app/',
@@ -28,15 +30,19 @@ gulp.task('clean', function() {
 
 // Process scripts and concatenate them into one output file
 gulp.task('scripts', ['clean'], function() {
-  gulp.src(paths.scripts, {cwd: bases.app})
-    .pipe(browserify({
-      debug: '!gulp.env.production',
-      transform: reactify
-    }))
-    //.pipe(concat('app.min.js'))
-    //.pipe(uglify())
+  var b = browserify({
+    entries: './app/js/main.js', 
+    debug: '!gulp.env.production',
+    transform: [reactify]
+  });
+
+  return b.bundle()
+    .pipe(source('main.js'))
+    .pipe(buffer())
     .pipe(gulp.dest(bases.dist + 'js/'))
-    .pipe(connect.reload());
+    //.pipe(uglify())
+    //.pipe(gulp.dest(bases.dist + 'js/'))
+    //.pipe(connect.reload());
 });
 
 // Copy all other files to dist directly

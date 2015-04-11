@@ -1,44 +1,29 @@
-var React = require('react');
 require('seedrandom');
+var React = require('react');
+var blocksStore = require('../stores/blocks_store');
+var blocksActions = require('../actions/blocks_actions');
 
 var Blocks = React.createClass({
   getInitialState: function() {
     return {
+      blocks: blocksStore.get()
     };
   },
 
   componentDidMount: function() {
-    this.fetchBlocks();
-    setInterval(this.fetchBlocks, 5000);
+    setInterval(blocksActions.intervalExpire, 5000);
+    blocksStore.addChangeListener(this._onChange);
   },
 
-  fetchBlocks: function() {
-    var oReq = new XMLHttpRequest();
-    oReq.open('get', 'http://api.blockapps.net/query/block/last/100', true);
-    oReq.send();
-
-    oReq.onreadystatechange = function() {
-      if (oReq.readyState == 4 && oReq.status == 200) {
-        var blocks = JSON.parse(oReq.responseText);
-        
-        blocks.forEach(function(block) {
-          var id = block.blockData.number;
-
-          if (!this.state[id]) {
-            console.log('adding new dude', Object.keys(this.state).length);
-            var stateUpdate = {};
-            stateUpdate[block.blockData.number] = block;
-            this.setState(stateUpdate);
-          }
-        }.bind(this));
-      }
-    }.bind(this);
+  componentWillUnmount: function() {
+    blocksStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
-    var nodes = Object.keys(this.state).map(function(id) {
-      var block = this.state[id];
-      Math.seedrandom(block.blockData.number)
+    var nodes = this.state.blocks.map(function(block) {
+      var id = block.blockData.number;
+
+      Math.seedrandom(id);
       var x = Math.random() * 100;
       var y = Math.random() * 100;
 
@@ -52,6 +37,12 @@ var Blocks = React.createClass({
         {nodes}
       </g>
     );
+  },
+
+  _onChange: function() {
+    this.setState({
+      blocks: blocksStore.get()
+    });
   }
 });
 

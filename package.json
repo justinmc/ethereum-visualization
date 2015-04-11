@@ -20,8 +20,15 @@
     "gulp-uglify": "^1.0.2"
   },
   "dependencies": {
+    "browserify": "^9.0.8",
+    "events": "^1.0.2",
+    "flux": "^2.0.1",
+    "keymirror": "^0.1.1",
+    "object-assign": "^2.0.0",
     "react": "^0.13.1",
     "reactify": "^1.1.0",
-    "seedrandom": "^2.3.11"
+    "seedrandom": "^2.3.11",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
