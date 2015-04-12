@@ -27,6 +27,10 @@ var BlocksStore = assign({}, EventEmitter.prototype, {
     });
 
     return blocks;
+  },
+
+  getCount: function() {
+    return Object.keys(_blocks).length;
   }
 });
 

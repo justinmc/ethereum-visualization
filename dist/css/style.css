@@ -3,13 +3,43 @@
   100%  { opacity: 0.1; }
 }
 
-.app {
+@-webkit-keyframes PULSE {
+  0%    { opacity: 0.2; }
+  50%   { opacity: 1; }
+  100%  { opacity: 0.2; }
+}
+
+html {
+  line-height: 0;
+}
+
+html, body, .container {
   height: 100%;
   width: 100%;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.title {
+  flex-basis: 50px;
+}
+
+.canvas {
+  flex: 1;
 }
 
 .block {
   opacity: 0.1;
   animation: FADE-OUT 10s 1;
   -webkit-animation: FADE-OUT 10s 1;
+}
+
+.loader {
+  opacity: 0.2;
+  animation: PULSE 1s infinite ease-in-out;
+  -webkit-animation: PULSE 1s infinite ease-in-out;
 }

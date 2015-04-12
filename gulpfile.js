@@ -15,7 +15,6 @@ var bases = {
 };
 
 var paths = {
-  scripts: ['js/**/*.js', 'js/**/*.jsx', '!js/vendor/**/*.js'],
   scriptsVendor: ['js/vendor/**/*.js'],
   styles: ['css/**/*.css'],
   html: ['index.html', '404.html'],
@@ -41,8 +40,7 @@ gulp.task('scripts', ['clean'], function() {
     .pipe(buffer())
     .pipe(gulp.dest(bases.dist + 'js/'))
     //.pipe(uglify())
-    //.pipe(gulp.dest(bases.dist + 'js/'))
-    //.pipe(connect.reload());
+    .pipe(connect.reload());
 });
 
 // Copy all other files to dist directly
@@ -69,7 +67,7 @@ gulp.task('default', ['clean', 'scripts', 'copy']);
 
 // A development task to run anytime a file changes
 gulp.task('watch', function() {
-  gulp.watch('app/**/*', ['clean', 'scripts', 'copy']);
+  gulp.watch('app/**/*', ['default']);
 });
 
 gulp.task('serve', ['default', 'watch'], function() {
