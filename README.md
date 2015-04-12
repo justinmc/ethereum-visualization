@@ -1,9 +1,9 @@
-# boilerplate-gulp-react
+# Ethereum Visualization
 
-A quick, clean starting point for React apps with, HTML5 Boilerplate, Gulp, and Browserify
+A React app to visualize Ethereum blocks in SVG.
 
 ## Getting Started
-Check out the app and run `npm install` to get set up.  Then run `gulp serve` to start serving the app, and start hacking!
+Check out the app and run `npm install` to get set up.  Then run `gulp serve` to start serving the app, and view it at localhost:8080 in your browser.
 
 ## License
 Licensed under the MIT license.  See the LICENSE file.
