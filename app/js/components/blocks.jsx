@@ -11,7 +11,7 @@ var Blocks = React.createClass({
   },
 
   componentDidMount: function() {
-    setInterval(blocksActions.intervalExpire, 5000);
+    setInterval(blocksActions.intervalExpire, 10000);
     blocksStore.addChangeListener(this._onChange);
   },
 
