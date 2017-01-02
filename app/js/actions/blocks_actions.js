@@ -5,7 +5,7 @@ module.exports = {
 
   intervalExpire: function() {
     var oReq = new XMLHttpRequest();
-    oReq.open('get', 'http://api.blockapps.net/query/block/last/100', true);
+    oReq.open('get', 'http://strato-dev4.blockapps.net/eth/v1.2/block/last/100', true);
     oReq.send();
 
     oReq.onreadystatechange = function() {
